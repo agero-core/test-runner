@@ -3,49 +3,54 @@
 [![NuGet Version](http://img.shields.io/nuget/v/Agero.TestsRunner.NUnit.svg?style=flat)](https://www.nuget.org/packages/Agero.TestsRunner.NUnit/) 
 [![NuGet Downloads](http://img.shields.io/nuget/dt/Agero.TestsRunner.NUnit.svg?style=flat)](https://www.nuget.org/packages/Agero.TestsRunner.NUnit/)
 
-Helper library that helps assert assumptions in the code. This helps to declare all assumption explicitly and continue to write code based on specified assumptions.
+## Usage:
+Library this helps to run your api intergration Tests. Create TestController in your api and use below code. Replace testAssemblyPath with APi IntegrationTests Path
 
 For example:
 
-- Assert string argument assumption:
 ```csharp
-void DoSomething(string name)
-{
-  // This code line will throw ArgumentException exception if assumption failed
-  Check.ArgumentIsNullOrWhiteSpace(name, nameof(name));
-  ...
-}
-```
+   [RoutePrefix("tests")]
+    public class TestController : BaseController
+    {
+        /// <remarks>
+        /// POST /tests?action=run
+        /// </remarks>
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage ExecuteAction([FromUri] TestAction? action = null)
+        {
+            if (!action.HasValue)
+                throw new BadRequestException("Action must be specified and valid.");
 
-- Assert class type argument assumption:
-```csharp
-void DoSomething(Person person)
-{
-  // This code line will throw ArgumentNullException exception if assumption failed
-  Check.ArgumentIsNull(person, nameof(person));
-  ...
-}
-```
+            if (!Settings.Default.EnableIntegrationTests)
+                throw new NotFoundException("Tests are disabled for current environment.", ResponseCode.INVALID_OPERATION);
 
-- Assert custom argument assumption:
-```csharp
-void DoSomething(decimal price)
-{
-  // This code line will throw ArgumentException exception if assumption failed
-  Check.Argument(price > 0, "price > 0");
-  ...
-}
-```
+            switch (action.Value)
+            {
+                case TestAction.Run:
+                {
+                    var testAssemblyPath = Path.Combine(HttpRuntime.BinDirectory, "Agero.YourAPI.RESTAPI.IntegrationTests.dll");
+                    var testAssemblyConfigPath = Path.Combine(HttpRuntime.AppDomainAppPath, "Web.config");
 
-- Assert custom assumption:
-```csharp
-void DoSomething()
-{
-    var response = CallApi();
+                    var response = Container.Get<ITestService>().Run(testAssemblyPath, testAssemblyConfigPath);
+                    return Request.CreateResponse(HttpStatusCode.OK, response);
+                }
 
-    // This code line will throw InvalidOperationException exception if assumption failed
-    Check.Assert(response != null, "response != null");
-  ...
+                default:
+                    throw new InvalidOperationException(action.ToString());
+            }
+        }
+
+        /// <remarks>
+        /// GET /tests/actions
+        /// </remarks>
+        [Route("actions")]
+        [HttpGet]
+        public string[] GetActions()
+        {
+            return EnumHelper.GetNames<TestAction>();
+        }
+    }
 }
 ```
 
