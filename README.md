@@ -4,7 +4,7 @@
 [![NuGet Downloads](http://img.shields.io/nuget/dt/Agero.TestsRunner.NUnit.svg?style=flat)](https://www.nuget.org/packages/Agero.TestsRunner.NUnit/)
 
 ## Usage:
-Library this helps to run your api intergration Tests. Create TestController in your api and use below code. Replace testAssemblyPath with APi IntegrationTests Path
+Library this helps to run API Intergration Tests. Create TestController in API and use below code. Replace 'testAssemblyPath' with API IntegrationTests Path.
 
 For example:
 
