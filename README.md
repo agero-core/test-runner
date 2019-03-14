@@ -4,53 +4,14 @@
 [![NuGet Downloads](http://img.shields.io/nuget/dt/Agero.TestsRunner.NUnit.svg?style=flat)](https://www.nuget.org/packages/Agero.TestsRunner.NUnit/)
 
 ## Usage:
-Library this helps to run API Intergration Tests. Create TestController in API and use below code. Replace 'testAssemblyPath' with API IntegrationTests Path.
+Library this helps to run Tests.
 
 For example:
 
-```csharp
-   [RoutePrefix("tests")]
-    public class TestController : BaseController
-    {
-        /// <remarks>
-        /// POST /tests?action=run
-        /// </remarks>
-        [Route("")]
-        [HttpPost]
-        public HttpResponseMessage ExecuteAction([FromUri] TestAction? action = null)
-        {
-            if (!action.HasValue)
-                throw new BadRequestException("Action must be specified and valid.");
+```csharp 
 
-            if (!Settings.Default.EnableIntegrationTests)
-                throw new NotFoundException("Tests are disabled for current environment.", ResponseCode.INVALID_OPERATION);
+Create Run: 
 
-            switch (action.Value)
-            {
-                case TestAction.Run:
-                {
-                    var testAssemblyPath = Path.Combine(HttpRuntime.BinDirectory, "Agero.YourAPI.RESTAPI.IntegrationTests.dll");
-                    var testAssemblyConfigPath = Path.Combine(HttpRuntime.AppDomainAppPath, "Web.config");
-
-                    var response = Container.Get<ITestService>().Run(testAssemblyPath, testAssemblyConfigPath);
-                    return Request.CreateResponse(HttpStatusCode.OK, response);
-                }
-
-                default:
-                    throw new InvalidOperationException(action.ToString());
-            }
-        }
-
-        /// <remarks>
-        /// GET /tests/actions
-        /// </remarks>
-        [Route("actions")]
-        [HttpGet]
-        public string[] GetActions()
-        {
-            return EnumHelper.GetNames<TestAction>();
-        }
-    }
-}
+var response = Container.Get<ITestService>().Run("<Your RESTAPI Integration Tests dll Path>", "<Your RESTAPI config path>");
 ```
 
