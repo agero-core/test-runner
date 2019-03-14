@@ -23,7 +23,7 @@ namespace Agero.TestsRunner.NUnit.Tests
             var response = testService.Run(assemblyPath, null, parameters);
 
             // Assert
-            Assert.IsTrue(response.Duration > 0);
+            Assert.IsTrue(response.Duration > 0, "response.Duration > 0");
             Assert.AreEqual("Failed", response.Result);
             Assert.AreEqual(2, response.Total);
             Assert.AreEqual(1, response.Passed);
@@ -32,7 +32,7 @@ namespace Agero.TestsRunner.NUnit.Tests
 
             var testGroup = response.TestGroups[0];
             Assert.AreEqual(nameof(NUnitTestClass), testGroup.Name);
-            Assert.IsTrue(testGroup.Duration > 0);
+            Assert.IsTrue(testGroup.Duration > 0, "testGroup.Duration > 0");
             Assert.AreEqual("Failed", testGroup.Result);
             Assert.AreEqual(2, testGroup.Total);
             Assert.AreEqual(1, testGroup.Passed);
@@ -41,17 +41,17 @@ namespace Agero.TestsRunner.NUnit.Tests
 
             var passedTest = testGroup.TestResults.SingleOrDefault(t => t.Name == nameof(NUnitTestClass.PassedTest));
             Assert.IsNotNull(passedTest);
-            Assert.IsTrue(passedTest.Duration > 0);
+            Assert.IsTrue(passedTest.Duration > 0, "passedTest.Duration > 0");
             Assert.AreEqual("Passed", passedTest.Result);
             Assert.IsNull(passedTest.Message);
             Assert.IsNull(passedTest.StackTrace);
 
             var failedTest = testGroup.TestResults.SingleOrDefault(t => t.Name == nameof(NUnitTestClass.FailedTest));
             Assert.IsNotNull(failedTest);
-            Assert.IsTrue(failedTest.Duration > 0);
+            Assert.IsTrue(failedTest.Duration > 0, "failedTest.Duration > 0");
             Assert.AreEqual("Failed", failedTest.Result);
             Assert.AreEqual("Error", failedTest.Message);
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(failedTest.StackTrace));
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(failedTest.StackTrace), "!string.IsNullOrWhiteSpace(failedTest.StackTrace)");
         }
     }
 }
