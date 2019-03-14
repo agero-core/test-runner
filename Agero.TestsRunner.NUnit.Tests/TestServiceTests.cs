@@ -10,6 +10,7 @@ namespace Agero.TestsRunner.NUnit.Tests
     public class TestServiceTests
     {
         [TestMethod]
+        [TestCategory("Ignore")]
         public void Run()
         {
             // Arrange
