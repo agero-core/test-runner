@@ -51,7 +51,6 @@ namespace Agero.TestsRunner.NUnit.Tests
             Assert.IsTrue(failedTest.Duration > 0, "failedTest.Duration > 0");
             Assert.AreEqual("Failed", failedTest.Result);
             Assert.AreEqual("Error", failedTest.Message);
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(failedTest.StackTrace), "!string.IsNullOrWhiteSpace(failedTest.StackTrace)");
         }
     }
 }
