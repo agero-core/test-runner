@@ -6,10 +6,11 @@
 ## Usage:
 Library this helps to run Tests.
 
-Create Run: 
+
+Create Test Service: 
 
 ```csharp 
-
-var response = Container.Get<ITestService>().Run("<Your RESTAPI Integration Tests dll Path>", "<Your RESTAPI config path>");
+var testService = new TestService();
+var response = testService.Run("<Your RESTAPI Integration Tests dll Path>");
 ```
 
