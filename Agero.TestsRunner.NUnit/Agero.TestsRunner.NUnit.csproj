@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -23,6 +23,10 @@
     <RootNamespace>Agero.TestsRunner.NUnit</RootNamespace>
     <AssemblyName>Agero.TestsRunner.NUnit</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Agero.Core.Checker" Version="1.0.11" />
