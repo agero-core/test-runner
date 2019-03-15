@@ -2,7 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>rest, api</PackageTags>
     <Version>1.0.0-alpha</Version>
+    <Authors>Core Automation Team</Authors>
+    <Company>Agero Inc.</Company>
+    <Copyright>Copyright © Agero 2019</Copyright>
+    <Product>Test Runner</Product>
+    <Description>Library to test RESTful calls in .NET applications.</Description>
+    <Title>Test Runner</Title>
+    <PackageProjectUrl>https://github.com/agero-core/rest-caller</PackageProjectUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIconUrl>https://secure.gravatar.com/avatar/8b6c044292b862f1870550039390f631</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/agero-core/test-runner/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/agero-core/test-runner.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RootNamespace>Agero.TestsRunner.NUnit</RootNamespace>
+    <AssemblyName>Agero.TestsRunner.NUnit</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
