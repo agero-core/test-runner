@@ -25,10 +25,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Agero.Core.Checker" Version="1.0.11" />
     <PackageReference Include="nunit.engine.netstandard" Version="3.8.0" />
   </ItemGroup>
